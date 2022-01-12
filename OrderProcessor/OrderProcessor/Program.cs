@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace OrderProcessor
 {
+    /*
     public abstract class Product
     {
         public List<string> Actions { get; set; }
@@ -15,9 +16,7 @@ namespace OrderProcessor
     {
         public PhysicalProduct()
         {
-            Actions = new List<string>();
-            GetSlip();
-            GenerateCommision();
+            Actions = new List<string>();          
         }
         public override void GetSlip()
         {
@@ -41,6 +40,11 @@ namespace OrderProcessor
             Actions.Add("Packaging Slip");
         }
 
+        public void SendEmail()
+        {
+            Actions.Add("Sent email to owner for membership activation/upgrade");
+        }
+
     }
 
     public class Book : PhysicalProduct
@@ -48,11 +52,12 @@ namespace OrderProcessor
         public Book(string name)
         {
             this.Name = name;
+            base.GetSlip();
             GetSlip();
-            Actions.Add("Commision payment to agent");
+            base.GenerateCommision();           
           
         }
-        public override void GetSlip()
+        public new void GetSlip()
         {            
             Actions.Add("duplicate slip for royalty department");
         }
@@ -64,6 +69,7 @@ namespace OrderProcessor
         {
             this.Name = name;
             Actions.Add("Activate Membership");
+            SendEmail();
         }       
     }
 
@@ -73,6 +79,7 @@ namespace OrderProcessor
         {
             this.Name = name;
             Actions.Add("Upgrade Membership");
+            SendEmail();
         }
     }
 
@@ -93,13 +100,14 @@ namespace OrderProcessor
             }
         }
     }
+    */
 
-
+   
     class Program
     {
         static void Main(string[] args)
         {
-            var book = new Book("temp book");
+                      
             Console.WriteLine("Hello World!");
         }
     }
