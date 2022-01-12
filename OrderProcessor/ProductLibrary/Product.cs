@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 namespace ProductLibrary
 {
+    #region concrete products
     public abstract class Product
     {
         public Product()
@@ -12,6 +13,7 @@ namespace ProductLibrary
         }
         internal List<string> Actions { get; set; }
         public string Name { get; internal set; }
+        public int ActionCount { get { return Actions.Count; } }
         internal virtual void GetSlip()
         {
             Actions.Add("Packaging Slip");
@@ -91,6 +93,10 @@ namespace ProductLibrary
         }
     }
 
+    #endregion
+
+    #region producer factories
+
     public abstract class ProductFactoryProducer
     {
         public abstract Product GetProduct(ProductType type, string productName);
@@ -158,5 +164,7 @@ namespace ProductLibrary
         [Description("Non-Physical")]
         Upgrade
     }
+
+    #endregion
 
 }
