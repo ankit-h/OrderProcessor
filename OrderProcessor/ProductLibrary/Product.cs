@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ProductLibrary
 {
@@ -25,6 +26,14 @@ namespace ProductLibrary
         {
             Actions.Add("Sent email to owner for membership activation/upgrade");
         }
+
+        public void GetActions()
+        {
+            for (int i = 1; i <= Actions.Count; i++)
+            {
+                Console.WriteLine($"{i}. {Actions[i - 1]}");
+            }
+        }
     }
 
     internal class Book : Product
@@ -35,7 +44,7 @@ namespace ProductLibrary
             GetSlip();
             AddCommision();
         }
-       
+
         internal override void GetSlip()
         {
             base.GetSlip();
@@ -55,7 +64,7 @@ namespace ProductLibrary
         internal override void GetSlip()
         {
             base.GetSlip();
-            if (this.Name == "Learning to Ski")
+            if (this.Name.Equals("Learning to Ski", StringComparison.InvariantCultureIgnoreCase))
             {
                 Actions.Add("Added Free First Aid Video");
             }
@@ -73,7 +82,8 @@ namespace ProductLibrary
     }
 
     internal class Upgrade : Product
-    {        public Upgrade(string name)
+    {
+        public Upgrade(string name)
         {
             this.Name = name;
             Actions.Add("Upgrade Membership");
@@ -89,12 +99,12 @@ namespace ProductLibrary
     public class PhysicalProductFactory : ProductFactoryProducer
     {
         public override Product GetProduct(ProductType type, string productName)
-        {            
+        {
             switch (type)
             {
 
                 case ProductType.Book:
-                   return new Book(productName);
+                    return new Book(productName);
                 case ProductType.Video:
                 case ProductType.Membership:
                 case ProductType.Upgrade:
@@ -109,7 +119,7 @@ namespace ProductLibrary
         public override Product GetProduct(ProductType type, string productName)
         {
             switch (type)
-            {     
+            {
                 case ProductType.Video:
                     return new Video(productName);
 
@@ -136,9 +146,16 @@ namespace ProductLibrary
 
     public enum ProductType
     {
+        [Description("Physical")]
         Book,
+
+        [Description("Non-Physical")]
         Video,
+
+        [Description("Non-Physical")]
         Membership,
+
+        [Description("Non-Physical")]
         Upgrade
     }
 
