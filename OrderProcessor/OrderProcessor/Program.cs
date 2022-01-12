@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductLibrary;
+using System;
 using System.Collections.Generic;
 
 namespace OrderProcessor
@@ -107,8 +108,10 @@ namespace OrderProcessor
     {
         static void Main(string[] args)
         {
-                      
-            Console.WriteLine("Hello World!");
+
+            var productFactory = FactoryProducer.GetProductFactory(true);
+            var bookProduct = productFactory.GetProduct(ProductType.Book, "Walking dead");
+            
         }
     }
 }

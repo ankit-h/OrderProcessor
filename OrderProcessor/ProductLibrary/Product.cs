@@ -5,19 +5,23 @@ namespace ProductLibrary
 {
     public abstract class Product
     {
-        public List<string> Actions { get; set; }
-        public string Name { get; set; }
-        public virtual void GetSlip()
+        public Product()
+        {
+            Actions = new List<string>();
+        }
+        internal List<string> Actions { get; set; }
+        public string Name { get; internal set; }
+        internal virtual void GetSlip()
         {
             Actions.Add("Packaging Slip");
         }
 
-        public virtual void AddCommision()
+        internal virtual void AddCommision()
         {
             Actions.Add("Generated commision to the agent");
         }
 
-        public virtual void SendMail()
+        internal virtual void SendMail()
         {
             Actions.Add("Sent email to owner for membership activation/upgrade");
         }
@@ -32,7 +36,7 @@ namespace ProductLibrary
             AddCommision();
         }
        
-        public override void GetSlip()
+        internal override void GetSlip()
         {
             base.GetSlip();
             Actions.Add("duplicate slip for royalty department");
@@ -48,7 +52,7 @@ namespace ProductLibrary
             GetSlip();
         }
 
-        public override void GetSlip()
+        internal override void GetSlip()
         {
             base.GetSlip();
             if (this.Name == "Learning to Ski")
