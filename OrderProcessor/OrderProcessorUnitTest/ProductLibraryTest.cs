@@ -45,7 +45,7 @@ namespace OrderProcessorUnitTest
         }
 
         [Fact]
-        public void PhysicalProducer_ForRandomVideoInput_Returns1ActionCounts()
+        public void NonPhysicalProducer_ForRandomVideoInput_Returns1ActionCounts()
         {
             //// Arange
 
@@ -59,7 +59,7 @@ namespace OrderProcessorUnitTest
 
 
         [Fact]
-        public void PhysicalProducer_ForLearningToSiVideoInput_Returns2ActionCounts()
+        public void NonPhysicalProducer_ForLearningToSiVideoInput_Returns2ActionCounts()
         {
             //// Arange
 
@@ -69,6 +69,19 @@ namespace OrderProcessorUnitTest
 
             //// Assert
             bookProduct.ActionCount.Should().Be(2);
+        }
+
+        [Fact]
+        public void PhysicalProducer_ForVideoInput_ThrowsException()
+        {
+            //// Arange
+
+            //// Act
+            var procuderFactory = FactoryProducer.GetProductFactory(true);
+           Action act = ()=> procuderFactory.GetProduct(ProductType.Video, "Sample Book");
+
+            //// Assert
+            act.Should().Throw<InvalidOperationException>();
         }
 
 
