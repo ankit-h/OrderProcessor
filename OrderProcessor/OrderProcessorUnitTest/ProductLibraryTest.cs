@@ -25,10 +25,52 @@ namespace OrderProcessorUnitTest
             //// Arange
 
             //// Act
-            var procuderFactory = FactoryProducer.GetProductFactory(true);
+            var procuderFactory = FactoryProducer.GetProductFactory(false);
 
             //// Assert
             procuderFactory.GetType().Should().Be(typeof(NonPhysicalProductFactory));
         }
+
+        [Fact]
+        public void PhysicalProducer_ForBookInput_Returns3ActionCounts()
+        {
+            //// Arange
+
+            //// Act
+            var procuderFactory = FactoryProducer.GetProductFactory(true);
+            var bookProduct =  procuderFactory.GetProduct(ProductType.Book, "Sample Book");
+
+            //// Assert
+            bookProduct.ActionCount.Should().Be(3);
+        }
+
+        [Fact]
+        public void PhysicalProducer_ForRandomVideoInput_Returns1ActionCounts()
+        {
+            //// Arange
+
+            //// Act
+            var procuderFactory = FactoryProducer.GetProductFactory(false);
+            var bookProduct = procuderFactory.GetProduct(ProductType.Video, "Sample Video");
+
+            //// Assert
+            bookProduct.ActionCount.Should().Be(1);
+        }
+
+
+        [Fact]
+        public void PhysicalProducer_ForLearningToSiVideoInput_Returns2ActionCounts()
+        {
+            //// Arange
+
+            //// Act
+            var procuderFactory = FactoryProducer.GetProductFactory(false);
+            var bookProduct = procuderFactory.GetProduct(ProductType.Video, "learning to ski");
+
+            //// Assert
+            bookProduct.ActionCount.Should().Be(2);
+        }
+
+
     }
 }
